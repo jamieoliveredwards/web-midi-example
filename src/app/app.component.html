@@ -1,5 +1,21 @@
-<ng-container *ngIf="midiAccess$ | async as midiAccess">
+<ng-container *ngIf="{
+  midiAccess: midiAccess$ | async,
+  midiSend: midiSend$ | async,
+  videoStream: videoStream$ | async
+} as context">
   <form [formGroup]="controlsForm">
     <input type="range" min="0" max="127" step="1" formControlName="x">
   </form>
+
+  <ng-container *ngIf="context.videoStream as videoStream">
+
+    <div class="video-container">
+      <canvas #canvas></canvas>
+      <video #video [srcObject]="context.videoStream" autoplay></video>
+    </div>
+
+    <button (click)="closeVideo(videoStream)">Close</button>
+
+  </ng-container>
+
 </ng-container>
