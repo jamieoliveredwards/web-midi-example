@@ -1,8 +1,11 @@
 <ng-container *ngIf="{
   midiAccess: midiAccess$ | async,
   midiSend: midiSend$ | async,
-  videoStream: videoStream$ | async
+  videoStream: videoStream$ | async,
+  predictions: predictions$ | async
 } as context">
+
+  <pre>{{ context.predictions | json }}</pre>
   <form [formGroup]="controlsForm">
     <input type="range" min="0" max="127" step="1" formControlName="x">
   </form>
